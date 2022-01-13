@@ -16,6 +16,11 @@ module Stripe
                                   operations: %i[list],
                                   resource_plural: "usage_record_summaries"
 
+    def usage_records(params = {}, opts = {})
+      resp, opts = execute_resource_request(:get, resource_url + "/usage_records", params, opts)
+      Util.convert_to_stripe_object(resp.data, opts)
+    end
+
     def usage_record_summaries(params = {}, opts = {})
       resp, opts = execute_resource_request(:get, resource_url + "/usage_record_summaries", params, opts)
       Util.convert_to_stripe_object(resp.data, opts)
